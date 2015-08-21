@@ -1,6 +1,6 @@
 # sirius-docker
 
-## Modifications from origin Dockerfile
+## Modifications from original Dockerfile
 - Updated to Ubuntu 14.04 LTS
 - Using OpenBLAS optimised for specific CPU architecture
 - Kaldi built optimised for specific CPU architecture
