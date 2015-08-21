@@ -15,7 +15,7 @@ $ docker build -tag sirius-docker .
 ```
 
 ##Start a container
-In order to use the Docker image you have just build or pulled use:
+In order to use the Docker image you have just built use:
 ```
 $ docker run -it --name sirius-docker sirius-docker /bin/bash
 ```
