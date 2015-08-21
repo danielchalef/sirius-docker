@@ -1,0 +1,20 @@
+--- compile-sirius-servers.sh.orig	2015-08-20 10:20:16.228639322 -0400
++++ compile-sirius-servers.sh	2015-08-20 10:39:39.409459205 -0400
+@@ -15,7 +15,7 @@
+ }
+ 
+ # thread for parallel build
+-[[ -n "$THREADS" ]] || THREADS=4
++[[ -n "$THREADS" ]] || THREADS=`grep -c '^processor.*: ' /proc/cpuinfo`
+ 
+ asr_ps=speech-recognition/pocketsphinx
+ asr_sphinx=speech-recognition/sphinx
+@@ -62,7 +62,7 @@
+ 
+ tar -xzf src.tar.gz --overwrite
+ cd ./src/
+-./configure ;
++./configure --openblas-root=/opt/OpenBLAS;
+ make -j $THREADS ;
+ 
+ cd ./online2bin
