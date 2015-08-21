@@ -7,7 +7,7 @@
 - Make threading uses all cores
 
 ## Build the image
-Modify the GCC and OpenBlAS CPU types to optimize for your specific environment.
+Modify the GCC and OpenBLAS CPU types to optimize for your specific environment.
 
 Build the image with the following command:
 ```
