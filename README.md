@@ -10,7 +10,7 @@
 - Optimise IMM & QA
 
 ## Build the image
-Modify the GCC and OpenBLAS CPU types to optimize for your specific environment:
+Modify the GCC and OpenBLAS CPU types in `Dockerfile` to optimize for your specific environment:
 - GCC: `CCFLAGS="-mtune=<your_gcc_arch"`
 - OpenBLAS add `make` argument `TARGET=<your OpenBLAS CPU arch>` (see CPU target list in OpenBLAS distribution) 
 
