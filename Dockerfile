@@ -7,6 +7,7 @@ ENV ANT_OPTS -Dfile.encoding=UTF8
 ENV DEBIAN_FRONTEND noninteractive
 ENV SIRIUS_HOME /opt/sirius
 RUN export SIRIUS_HOME=$SIRIUS_HOME 
+RUN export THREADS=`getconf _NPROCESSORS_ONLN`
 
 COPY compile-sirius-servers.sh.patch /tmp/
 
@@ -58,7 +59,7 @@ RUN git clone https://github.com/claritylab/sirius.git $SIRIUS_HOME
 RUN git clone https://github.com/xianyi/OpenBLAS.git $SIRIUS_HOME/OpenBLAS 
 WORKDIR $SIRIUS_HOME/OpenBLAS
 RUN git checkout v0.2.14
-RUN make -j8 TARGET=bulldozer CPPFLAGS="-mtune=bdver1" CFLAGS="-mtune=bdver1"
+RUN make -j $THREADS CPPFLAGS="-mtune=native" CFLAGS="-mtune=native"
 RUN make install
 
 #Setting up sirius
@@ -70,7 +71,8 @@ RUN ./get-opencv.sh
 RUN ./compile-sirius-servers.sh
 
 #Automatic Speech Recognition(ASR)
-RUN $SIRIUS_HOME/sirius-application/run-scripts/start-asr-server.sh
+WORKDIR $SIRIUS_HOME/sirius-application/run-scripts
+RUN ./start-asr-server.sh
 
 #Image Matching(IMM)
 #RUN $SIRIUS_HOME/sirius-application/image-matching/make-db.py landmarks $SIRIUS_HOME/sirius-application/image-matching/matching/landmarks/db/
